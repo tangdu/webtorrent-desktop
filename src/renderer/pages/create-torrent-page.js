@@ -93,21 +93,21 @@ class CreateTorrentPage extends React.Component {
           style={{
             marginBottom: 10
           }}
-          hideLabel='Hide advanced settings...'
-          showLabel='Show advanced settings...'>
+          hideLabel='隐藏高级设置...'
+          showLabel='显示高级设置...'>
           {this.renderAdvanced()}
         </ShowMore>
         <div className='float-right'>
           <FlatButton
             className='control cancel'
-            label='Cancel'
+            label='取消'
             style={{
               marginRight: 10
             }}
             onClick={dispatcher('cancel')} />
           <RaisedButton
             className='control create-torrent-button'
-            label='Create Torrent'
+            label='创建Torrent'
             primary
             onClick={this.handleSubmit} />
         </div>

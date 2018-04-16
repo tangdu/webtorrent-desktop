@@ -15,7 +15,7 @@ module.exports = class PrefsController {
       url: 'preferences',
       setup: function (cb) {
         // initialize preferences
-        state.window.title = 'Preferences'
+        state.window.title = '配置'
         state.unsaved = Object.assign(state.unsaved || {}, {
           prefs: Object.assign({}, state.saved.prefs)
         })

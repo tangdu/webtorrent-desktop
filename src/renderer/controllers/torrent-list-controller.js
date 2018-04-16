@@ -57,7 +57,7 @@ module.exports = class TorrentListController {
         url: 'create-torrent',
         files: files,
         setup: (cb) => {
-          this.state.window.title = 'Create New Torrent'
+          this.state.window.title = '创建新Torrent'
           cb(null)
         }
       })
@@ -239,12 +239,12 @@ module.exports = class TorrentListController {
     const menu = new electron.remote.Menu()
 
     menu.append(new electron.remote.MenuItem({
-      label: 'Remove From List',
+      label: '移除此项',
       click: () => dispatch('confirmDeleteTorrent', torrentSummary.infoHash, false)
     }))
 
     menu.append(new electron.remote.MenuItem({
-      label: 'Remove Data File',
+      label: '移除文件',
       click: () => dispatch('confirmDeleteTorrent', torrentSummary.infoHash, true)
     }))
 
@@ -254,7 +254,7 @@ module.exports = class TorrentListController {
 
     if (torrentSummary.files) {
       menu.append(new electron.remote.MenuItem({
-        label: process.platform === 'darwin' ? 'Show in Finder' : 'Show in Folder',
+        label: process.platform === 'darwin' ? '显示资源' : '显示资源',
         click: () => showItemInFolder(torrentSummary)
       }))
       menu.append(new electron.remote.MenuItem({
@@ -263,17 +263,17 @@ module.exports = class TorrentListController {
     }
 
     menu.append(new electron.remote.MenuItem({
-      label: 'Copy Magnet Link to Clipboard',
+      label: '复制路径',
       click: () => electron.clipboard.writeText(torrentSummary.magnetURI)
     }))
 
     menu.append(new electron.remote.MenuItem({
-      label: 'Copy Instant.io Link to Clipboard',
+      label: '复制至Instant.io',
       click: () => electron.clipboard.writeText(`https://instant.io/#${torrentSummary.infoHash}`)
     }))
 
     menu.append(new electron.remote.MenuItem({
-      label: 'Save Torrent File As...',
+      label: '保存Torrent文件...',
       click: () => dispatch('saveTorrentFileAs', torrentSummary.torrentKey),
       enabled: torrentSummary.torrentFileName != null
     }))
@@ -290,11 +290,11 @@ module.exports = class TorrentListController {
     const newFileName = path.parse(torrentSummary.name).name + '.torrent'
     const win = electron.remote.getCurrentWindow()
     const opts = {
-      title: 'Save Torrent File',
+      title: '保存Torrent文件',
       defaultPath: path.join(downloadPath, newFileName),
       filters: [
-        { name: 'Torrent Files', extensions: ['torrent'] },
-        { name: 'All Files', extensions: ['*'] }
+        { name: 'Torrent文件', extensions: ['torrent'] },
+        { name: '所有文件', extensions: ['*'] }
       ]
     }
 

@@ -30,7 +30,7 @@ module.exports = class TorrentList extends React.Component {
     contents.push(...torrentElems)
     contents.push(
       <div key='torrent-placeholder' className='torrent-placeholder'>
-        <span className='ellipsis'>Drop a torrent file here or paste a magnet link</span>
+        <span className='ellipsis'>在这里放下一个torrent文件或者粘贴一个磁链</span>
       </div>
     )
 
@@ -207,12 +207,12 @@ module.exports = class TorrentList extends React.Component {
       let status
       if (torrentSummary.status === 'paused') {
         if (!torrentSummary.progress) status = ''
-        else if (torrentSummary.progress.progress === 1) status = 'Not seeding'
-        else status = 'Paused'
+        else if (torrentSummary.progress.progress === 1) status = '没有发送'
+        else status = '暂停'
       } else if (torrentSummary.status === 'downloading') {
-        status = 'Downloading'
+        status = '下载中'
       } else if (torrentSummary.status === 'seeding') {
-        status = 'Seeding'
+        status = '发送中'
       } else { // torrentSummary.status is 'new' or something unexpected
         status = ''
       }

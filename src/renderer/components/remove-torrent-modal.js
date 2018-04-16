@@ -7,15 +7,15 @@ module.exports = class RemoveTorrentModal extends React.Component {
   render () {
     const state = this.props.state
     const message = state.modal.deleteData
-      ? 'Are you sure you want to remove this torrent from the list and delete the data file?'
-      : 'Are you sure you want to remove this torrent from the list?'
-    const buttonText = state.modal.deleteData ? 'REMOVE DATA' : 'REMOVE'
+      ? '您确定要从列表中删除该种子并删除数据文件吗?'
+      : '您确定要从列表中删除该种子吗??'
+    const buttonText = state.modal.deleteData ? '删除数据文件' : '删除'
 
     return (
       <div>
         <p><strong>{message}</strong></p>
         <ModalOKCancel
-          cancelText='CANCEL'
+          cancelText='取消'
           onCancel={dispatcher('exitModal')}
           okText={buttonText}
           onOK={handleRemove} />

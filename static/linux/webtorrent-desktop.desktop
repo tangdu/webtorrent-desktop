@@ -18,16 +18,16 @@ MimeType=application/x-bittorrent;x-scheme-handler/magnet;x-scheme-handler/strea
 Actions=CreateNewTorrent;OpenTorrentFile;OpenTorrentAddress;
 
 [Desktop Action CreateNewTorrent]
-Name=Create New Torrent...
+Name=创建新Torrent...
 Exec=$EXEC_PATH -n
 Path=$APP_PATH
 
 [Desktop Action OpenTorrentFile]
-Name=Open Torrent File...
+Name=打开Torrent文件...
 Exec=$EXEC_PATH -o
 Path=$APP_PATH
 
 [Desktop Action OpenTorrentAddress]
-Name=Open Torrent Address...
+Name=打开Torrent路径...
 Exec=$EXEC_PATH -u
 Path=$APP_PATH

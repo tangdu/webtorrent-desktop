@@ -15,17 +15,17 @@ module.exports = class UnsupportedMediaModal extends React.Component {
       ? dispatcher('openExternalPlayer')
       : () => this.onInstall()
     const actionText = state.modal.externalPlayerInstalled
-      ? 'PLAY IN ' + state.getExternalPlayerName().toUpperCase()
-      : 'INSTALL VLC'
+      ? '播放在 ' + state.getExternalPlayerName().toUpperCase()
+      : '安装VLC播放器'
     const errorMessage = state.modal.externalPlayerNotFound
-      ? 'Couldn\'t run external player. Please make sure it\'s installed.'
+      ? '不能运行外部播放器，请确保你已安装'
       : ''
     return (
       <div>
-        <p><strong>Sorry, we can't play that file.</strong></p>
+        <p><strong>对不起，我们不能播放那个文件.</strong></p>
         <p>{message}</p>
         <ModalOKCancel
-          cancelText='CANCEL'
+          cancelText='取消'
           onCancel={dispatcher('backToList')}
           okText={actionText}
           onOK={onAction} />

@@ -1,6 +1,6 @@
 module.exports = {
   init,
-  togglePlaybackControls,
+  toggle播放Controls,
   setWindowFocus,
   setAllowNav,
   onPlayerUpdate,
@@ -22,51 +22,51 @@ function init () {
   electron.Menu.setApplicationMenu(menu)
 }
 
-function togglePlaybackControls (flag) {
-  getMenuItem('Play/Pause').enabled = flag
-  getMenuItem('Skip Next').enabled = flag
-  getMenuItem('Skip Previous').enabled = flag
-  getMenuItem('Increase Volume').enabled = flag
-  getMenuItem('Decrease Volume').enabled = flag
-  getMenuItem('Step Forward').enabled = flag
-  getMenuItem('Step Backward').enabled = flag
-  getMenuItem('Increase Speed').enabled = flag
-  getMenuItem('Decrease Speed').enabled = flag
-  getMenuItem('Add Subtitles File...').enabled = flag
+function toggle播放Controls (flag) {
+  getMenuItem('播放/暂停').enabled = flag
+  getMenuItem('下一个').enabled = flag
+  getMenuItem('上一个').enabled = flag
+  getMenuItem('增大音量').enabled = flag
+  getMenuItem('减小音量').enabled = flag
+  getMenuItem('前进').enabled = flag
+  getMenuItem('倒退').enabled = flag
+  getMenuItem('增加速度').enabled = flag
+  getMenuItem('减少速度').enabled = flag
+  getMenuItem('添加字幕文件...').enabled = flag
 
   if (flag === false) {
-    getMenuItem('Skip Next').enabled = false
-    getMenuItem('Skip Previous').enabled = false
+    getMenuItem('下一个').enabled = false
+    getMenuItem('上一个').enabled = false
   }
 }
 
 function onPlayerUpdate (hasNext, hasPrevious) {
-  getMenuItem('Skip Next').enabled = hasNext
-  getMenuItem('Skip Previous').enabled = hasPrevious
+  getMenuItem('下一个').enabled = hasNext
+  getMenuItem('上一个').enabled = hasPrevious
 }
 
 function setWindowFocus (flag) {
-  getMenuItem('Full Screen').enabled = flag
-  getMenuItem('Float on Top').enabled = flag
+  getMenuItem('全屏').enabled = flag
+  getMenuItem('窗口前置').enabled = flag
 }
 
 // Disallow opening more screens on top of the current one.
 function setAllowNav (flag) {
-  getMenuItem('Preferences').enabled = flag
+  getMenuItem('配置').enabled = flag
   if (process.platform === 'darwin') {
-    getMenuItem('Create New Torrent...').enabled = flag
+    getMenuItem('创建新Torrent...').enabled = flag
   } else {
-    getMenuItem('Create New Torrent from Folder...').enabled = flag
-    getMenuItem('Create New Torrent from File...').enabled = flag
+    getMenuItem('创建新Torrent来自文件夹...').enabled = flag
+    getMenuItem('创建新Torrent来自文件...').enabled = flag
   }
 }
 
 function onToggleAlwaysOnTop (flag) {
-  getMenuItem('Float on Top').checked = flag
+  getMenuItem('窗口前置').checked = flag
 }
 
 function onToggleFullScreen (flag) {
-  getMenuItem('Full Screen').checked = flag
+  getMenuItem('全屏').checked = flag
 }
 
 function getMenuItem (label) {
@@ -81,12 +81,12 @@ function getMenuItem (label) {
 function getMenuTemplate () {
   const template = [
     {
-      label: 'File',
+      label: '文件',
       submenu: [
         {
           label: process.platform === 'darwin'
-            ? 'Create New Torrent...'
-            : 'Create New Torrent from Folder...',
+            ? '创建新Torrent...'
+            : '创建新Torrent来自文件夹...',
           accelerator: 'CmdOrCtrl+N',
           click: () => {
             const dialog = require('./dialog')
@@ -94,7 +94,7 @@ function getMenuTemplate () {
           }
         },
         {
-          label: 'Open Torrent File...',
+          label: '打开Torrent文件...',
           accelerator: 'CmdOrCtrl+O',
           click: () => {
             const dialog = require('./dialog')
@@ -102,7 +102,7 @@ function getMenuTemplate () {
           }
         },
         {
-          label: 'Open Torrent Address...',
+          label: '打开Torrent路径...',
           accelerator: 'CmdOrCtrl+U',
           click: () => {
             const dialog = require('./dialog')
@@ -118,7 +118,7 @@ function getMenuTemplate () {
       ]
     },
     {
-      label: 'Edit',
+      label: '编辑',
       submenu: [
         {
           role: 'undo'
@@ -136,7 +136,7 @@ function getMenuTemplate () {
           role: 'copy'
         },
         {
-          label: 'Paste Torrent Address',
+          label: 'Parse Torrent',
           role: 'paste'
         },
         {
@@ -148,10 +148,10 @@ function getMenuTemplate () {
       ]
     },
     {
-      label: 'View',
+      label: '视图',
       submenu: [
         {
-          label: 'Full Screen',
+          label: '全屏',
           type: 'checkbox',
           accelerator: process.platform === 'darwin'
             ? 'Ctrl+Command+F'
@@ -159,7 +159,7 @@ function getMenuTemplate () {
           click: () => windows.main.toggleFullScreen()
         },
         {
-          label: 'Float on Top',
+          label: '窗口前置',
           type: 'checkbox',
           click: () => windows.main.toggleAlwaysOnTop()
         },
@@ -167,7 +167,7 @@ function getMenuTemplate () {
           type: 'separator'
         },
         {
-          label: 'Go Back',
+          label: '返回',
           accelerator: 'Esc',
           click: () => windows.main.dispatch('escapeBack')
         },
@@ -175,17 +175,17 @@ function getMenuTemplate () {
           type: 'separator'
         },
         {
-          label: 'Developer',
+          label: '开发者',
           submenu: [
             {
-              label: 'Developer Tools',
+              label: '开发者工具',
               accelerator: process.platform === 'darwin'
                 ? 'Alt+Command+I'
                 : 'Ctrl+Shift+I',
               click: () => windows.main.toggleDevTools()
             },
             {
-              label: 'Show WebTorrent Process',
+              label: '显示WebTorrent进程',
               accelerator: process.platform === 'darwin'
                 ? 'Alt+Command+P'
                 : 'Ctrl+Shift+P',
@@ -196,10 +196,10 @@ function getMenuTemplate () {
       ]
     },
     {
-      label: 'Playback',
+      label: '播放',
       submenu: [
         {
-          label: 'Play/Pause',
+          label: '播放/暂停',
           accelerator: 'Space',
           click: () => windows.main.dispatch('playPause'),
           enabled: false
@@ -208,13 +208,13 @@ function getMenuTemplate () {
           type: 'separator'
         },
         {
-          label: 'Skip Next',
+          label: '下一个',
           accelerator: 'N',
           click: () => windows.main.dispatch('nextTrack'),
           enabled: false
         },
         {
-          label: 'Skip Previous',
+          label: '上一个',
           accelerator: 'P',
           click: () => windows.main.dispatch('previousTrack'),
           enabled: false
@@ -223,13 +223,13 @@ function getMenuTemplate () {
           type: 'separator'
         },
         {
-          label: 'Increase Volume',
+          label: '增大音量',
           accelerator: 'CmdOrCtrl+Up',
           click: () => windows.main.dispatch('changeVolume', 0.1),
           enabled: false
         },
         {
-          label: 'Decrease Volume',
+          label: '减小音量',
           accelerator: 'CmdOrCtrl+Down',
           click: () => windows.main.dispatch('changeVolume', -0.1),
           enabled: false
@@ -238,7 +238,7 @@ function getMenuTemplate () {
           type: 'separator'
         },
         {
-          label: 'Step Forward',
+          label: '前进',
           accelerator: process.platform === 'darwin'
             ? 'CmdOrCtrl+Alt+Right'
             : 'Alt+Right',
@@ -246,7 +246,7 @@ function getMenuTemplate () {
           enabled: false
         },
         {
-          label: 'Step Backward',
+          label: '倒退',
           accelerator: process.platform === 'darwin'
             ? 'CmdOrCtrl+Alt+Left'
             : 'Alt+Left',
@@ -257,53 +257,53 @@ function getMenuTemplate () {
           type: 'separator'
         },
         {
-          label: 'Increase Speed',
+          label: '增加速度',
           accelerator: 'CmdOrCtrl+=',
-          click: () => windows.main.dispatch('changePlaybackRate', 1),
+          click: () => windows.main.dispatch('change播放Rate', 1),
           enabled: false
         },
         {
-          label: 'Decrease Speed',
+          label: '减少速度',
           accelerator: 'CmdOrCtrl+-',
-          click: () => windows.main.dispatch('changePlaybackRate', -1),
+          click: () => windows.main.dispatch('change播放Rate', -1),
           enabled: false
         },
         {
           type: 'separator'
         },
         {
-          label: 'Add Subtitles File...',
+          label: '添加字幕文件...',
           click: () => windows.main.dispatch('openSubtitles'),
           enabled: false
         }
       ]
     },
     {
-      label: 'Transfers',
+      label: '传输',
       submenu: [
         {
-          label: 'Pause All',
+          label: '暂停所有',
           click: () => windows.main.dispatch('pauseAllTorrents')
         },
         {
-          label: 'Resume All',
+          label: '唤醒所有',
           click: () => windows.main.dispatch('resumeAllTorrents')
         }
       ]
     },
     {
-      label: 'Help',
+      label: '帮助',
       role: 'help',
       submenu: [
         {
-          label: 'Learn more about ' + config.APP_NAME,
+          label: '更多关于 ' + config.APP_NAME,
           click: () => {
             const shell = require('./shell')
             shell.openExternal(config.HOME_PAGE_URL)
           }
         },
         {
-          label: 'Contribute on GitHub',
+          label: '投稿GitHub',
           click: () => {
             const shell = require('./shell')
             shell.openExternal(config.GITHUB_URL)
@@ -313,7 +313,7 @@ function getMenuTemplate () {
           type: 'separator'
         },
         {
-          label: 'Report an Issue...',
+          label: '报告一个问题...',
           click: () => {
             const shell = require('./shell')
             shell.openExternal(config.GITHUB_URL_ISSUES)
@@ -335,7 +335,7 @@ function getMenuTemplate () {
           type: 'separator'
         },
         {
-          label: 'Preferences',
+          label: '配置',
           accelerator: 'Cmd+,',
           click: () => windows.main.dispatch('preferences')
         },
@@ -407,7 +407,7 @@ function getMenuTemplate () {
   if (process.platform === 'linux' || process.platform === 'win32') {
     // File menu (Windows, Linux)
     template[0].submenu.unshift({
-      label: 'Create New Torrent from File...',
+      label: '创建新Torrent来自文件...',
       click: () => {
         const dialog = require('./dialog')
         dialog.openSeedFile()
@@ -420,12 +420,12 @@ function getMenuTemplate () {
         type: 'separator'
       },
       {
-        label: 'Preferences',
+        label: '配置',
         accelerator: 'CmdOrCtrl+,',
         click: () => windows.main.dispatch('preferences')
       })
 
-    // Help menu (Windows, Linux)
+    // 帮助 menu (Windows, Linux)
     template[5].submenu.push(
       {
         type: 'separator'

@@ -9,7 +9,7 @@ module.exports = class CreateTorrentErrorPage extends React.Component {
         <h2>Create torrent</h2>
         <p className='torrent-info'>
           <p>
-            Sorry, you must select at least one file that is not a hidden file.
+          对不起，您必须选择至少一个不是隐藏文件的文件.
           </p>
           <p>
             Hidden files, starting with a . character, are not included.
@@ -17,7 +17,7 @@ module.exports = class CreateTorrentErrorPage extends React.Component {
         </p>
         <p className='float-right'>
           <button className='button-flat light' onClick={dispatcher('cancel')}>
-            Cancel
+            取消
           </button>
         </p>
       </div>

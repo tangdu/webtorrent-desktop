@@ -32,11 +32,11 @@ class PreferencesPage extends React.Component {
       <Preference>
         <PathSelector
           dialog={{
-            title: 'Select download directory',
+            title: '选择下载目录',
             properties: [ 'openDirectory' ]
           }}
           onChange={this.handleDownloadPathChange}
-          title='Download location'
+          title='下载目录'
           value={this.props.state.unsaved.prefs.downloadPath} />
       </Preference>
     )
@@ -52,7 +52,7 @@ class PreferencesPage extends React.Component {
         <Checkbox
           className='control'
           checked={!this.props.state.unsaved.prefs.openExternalPlayer}
-          label={'Play torrent media files using WebTorrent'}
+          label={'使用WebTorrent播放torrent媒体文件'}
           onCheck={this.handleOpenExternalPlayerChange} />
       </Preference>
     )
@@ -68,10 +68,10 @@ class PreferencesPage extends React.Component {
         <Checkbox
           className='control'
           checked={this.props.state.unsaved.prefs.highestPlaybackPriority}
-          label={'Highest Playback Priority'}
+          label={'回放最高优先级'}
           onCheck={this.handleHighestPlaybackPriorityChange}
         />
-        <p>Pauses all active torrents to allow playback to use all of the available bandwidth.</p>
+        <p>暂停所有活跃的torrents以允许回放使用所有可用带宽.</p>
       </Preference>
     )
   }
@@ -85,20 +85,20 @@ class PreferencesPage extends React.Component {
     const playerName = this.props.state.getExternalPlayerName()
 
     const description = this.props.state.unsaved.prefs.openExternalPlayer
-      ? `Torrent media files will always play in ${playerName}.`
-      : `Torrent media files will play in ${playerName} if WebTorrent cannot play them.`
+      ? `Torrent媒体文件将一直播放 ${playerName}.`
+      : `Torrent媒体文件将一直播放 ${playerName} 如果WebTorrent不能播放它们.`
 
     return (
       <Preference>
         <p>{description}</p>
         <PathSelector
           dialog={{
-            title: 'Select media player app',
+            title: '选择媒体播放器应用程序',
             properties: [ 'openFile' ]
           }}
           displayValue={playerName}
           onChange={this.handleExternalPlayerPathChange}
-          title='External player'
+          title='外部播放器'
           value={playerPath ? path.dirname(playerPath) : null} />
       </Preference>
     )
@@ -114,7 +114,7 @@ class PreferencesPage extends React.Component {
         <Checkbox
           className='control'
           checked={this.props.state.unsaved.prefs.autoAddTorrents}
-          label={'Watch for new .torrent files and add them immediately'}
+          label={'查看新的.torrent文件并立即添加它们'}
           onCheck={(e, value) => { this.handleAutoAddTorrentsChange(e, value) }}
         />
       </Preference>
@@ -124,7 +124,7 @@ class PreferencesPage extends React.Component {
   handleAutoAddTorrentsChange (e, isChecked) {
     const torrentsFolderPath = this.props.state.unsaved.prefs.torrentsFolderPath
     if (isChecked && !torrentsFolderPath) {
-      alert('Select a torrents folder first.') // eslint-disable-line
+      alert('首先选择一个torrents文件夹.') // eslint-disable-line
       e.preventDefault()
       return
     }
@@ -146,12 +146,12 @@ class PreferencesPage extends React.Component {
       <Preference>
         <PathSelector
           dialog={{
-            title: 'Select folder to watch for new torrents',
+            title: '选择文件夹以查看新的torrent',
             properties: [ 'openDirectory' ]
           }}
           displayValue={torrentsFolderPath || ''}
           onChange={this.handletorrentsFolderPathChange}
-          title='Folder to watch'
+          title='文件夹查看'
           value={torrentsFolderPath ? path.dirname(torrentsFolderPath) : null} />
       </Preference>
     )
@@ -166,17 +166,17 @@ class PreferencesPage extends React.Component {
     if (isFileHandler) {
       return (
         <Preference>
-          <p>WebTorrent is your default torrent app. Hooray!</p>
+          <p>WebTorrent是你的默认torrent应用程序!</p>
         </Preference>
       )
     }
     return (
       <Preference>
-        <p>WebTorrent is not currently the default torrent app.</p>
+        <p>WebTorrent现在不是默认的torrent应用.</p>
         <RaisedButton
           className='control'
           onClick={this.handleSetDefaultApp}
-          label='Make WebTorrent the default' />
+          label='使WebTorrent默认' />
       </Preference>
     )
   }
@@ -191,12 +191,12 @@ class PreferencesPage extends React.Component {
     }
 
     return (
-      <PreferencesSection title='Startup'>
+      <PreferencesSection title='启动'>
         <Preference>
           <Checkbox
             className='control'
             checked={this.props.state.unsaved.prefs.startup}
-            label={'Open WebTorrent on startup.'}
+            label={'在启动时打开WebTorrent.'}
             onCheck={this.handleStartupChange}
           />
         </Preference>
@@ -216,17 +216,17 @@ class PreferencesPage extends React.Component {
     }
     return (
       <div style={style}>
-        <PreferencesSection title='Folders'>
+        <PreferencesSection title='文件设置'>
           {this.downloadPathSelector()}
           {this.autoAddTorrentsCheckbox()}
           {this.torrentsFolderPathSelector()}
         </PreferencesSection>
-        <PreferencesSection title='Playback'>
+        <PreferencesSection title='播放设置'>
           {this.openExternalPlayerCheckbox()}
           {this.externalPlayerPathSelector()}
           {this.highestPlaybackPriorityCheckbox()}
         </PreferencesSection>
-        <PreferencesSection title='Default torrent app'>
+        <PreferencesSection title='默认的torrent应用'>
           {this.setDefaultAppButton()}
         </PreferencesSection>
         {this.setStartupSection()}
