@@ -416,6 +416,23 @@ textarea,
 }
 
 /*
+*torrent-main
+*/
+.torrent-main {
+  display: flex;
+  width: 100%;
+}
+.torrent-file {
+  flex: 2;
+}
+.torrent-file .item img {
+  width: 113px;
+  height: 148px;
+}
+.torrent-list {
+  flex: 8;
+}
+/*
  * TORRENT LIST: ERRORS
  */
 

@@ -458,7 +458,7 @@ function setDimensions (dimensions) {
 // via any method (drag-drop, drag to app icon, command line)
 function onOpen (files) {
   if (!Array.isArray(files)) files = [ files ]
-
+  console.log(files)
   const url = state.location.url()
   const allTorrents = files.every(TorrentPlayer.isTorrent)
   const allSubtitles = files.every(controllers.subtitles().isSubtitle)

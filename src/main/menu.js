@@ -296,14 +296,14 @@ function getMenuTemplate () {
       role: 'help',
       submenu: [
         {
-          label: '更多关于 ' + config.APP_NAME,
+          label: '关于 ' + config.APP_NAME,
           click: () => {
             const shell = require('./shell')
             shell.openExternal(config.HOME_PAGE_URL)
           }
         },
         {
-          label: '投稿GitHub',
+          label: '访问GitHub',
           click: () => {
             const shell = require('./shell')
             shell.openExternal(config.GITHUB_URL)
@@ -313,7 +313,7 @@ function getMenuTemplate () {
           type: 'separator'
         },
         {
-          label: '报告一个问题...',
+          label: '报告问题...',
           click: () => {
             const shell = require('./shell')
             shell.openExternal(config.GITHUB_URL_ISSUES)

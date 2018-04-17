@@ -13,13 +13,14 @@ module.exports = class TorrentList extends React.Component {
     const state = this.props.state
 
     const contents = []
+    const contentFiles = []
     if (state.downloadPathStatus === 'missing') {
       contents.push(
         <div key='torrent-missing-path'>
-          <p>Download path missing: {state.saved.prefs.downloadPath}</p>
-          <p>Check that all drives are connected?</p>
-          <p>Alternatively, choose a new download path
-            in <a href='#' onClick={dispatcher('preferences')}>Preferences</a>
+          <p>下载路径失踪: {state.saved.prefs.downloadPath}</p>
+          <p>检查所有驱动器是否连接?</p>
+          <p>或者，选择一个新的下载路径
+            in <a href='#' onClick={dispatcher('preferences')}>配置</a>
           </p>
         </div>
       )
@@ -33,10 +34,26 @@ module.exports = class TorrentList extends React.Component {
         <span className='ellipsis'>在这里放下一个torrent文件或者粘贴一个磁链</span>
       </div>
     )
-
+    const files =[{title:'权力的游戏',image:'http://img.vzmz.com/201701/p2390194395.jpg'}]
+    const fileElems = files.map(
+      (fileSummary) => this.renderToFile(fileSummary)
+    )
+    contentFiles.push(...fileElems)
     return (
-      <div key='torrent-list' className='torrent-list'>
-        {contents}
+      <div className='torrent-main'>
+        <div className='torrent-file'>{contentFiles}</div>
+        <div key='torrent-list' className='torrent-list'>
+          {contents}
+        </div>
+      </div>
+    )
+  }
+
+  renderToFile(fileSummary){
+    return (
+      <div className='item'>
+        <div>{fileSummary.title}</div>
+        <img src={fileSummary.image}/>
       </div>
     )
   }
@@ -260,16 +277,16 @@ module.exports = class TorrentList extends React.Component {
       let message = ''
       if (torrentSummary.error === 'path-missing') {
         // Special case error: this torrent's download dir or file is missing
-        message = 'Missing path: ' + TorrentSummary.getFileOrFolder(torrentSummary)
+        message = '丢失路径 ' + TorrentSummary.getFileOrFolder(torrentSummary)
       } else if (torrentSummary.error) {
         // General error for this torrent: just show the message
         message = torrentSummary.error.message || torrentSummary.error
       } else if (torrentSummary.status === 'paused') {
         // No file info, no infohash, and we're not trying to download from the DHT
-        message = 'Failed to load torrent info. Click the download button to try again...'
+        message = '未能加载torrent信息。单击“下载”按钮再次尝试...'
       } else {
         // No file info, no infohash, trying to load from the DHT
-        message = 'Downloading torrent info...'
+        message = '下载torrent信息中...'
       }
       filesElement = (
         <div key='files' className='files warning'>
@@ -394,8 +411,8 @@ function getErrorMessage (torrentSummary) {
   if (err === 'path-missing') {
     return (
       <span>
-        Path missing.<br />
-        Fix and restart the app, or delete the torrent.
+        路径丢失.<br />
+        修复和重启应用程序，或删除torrent.
       </span>
     )
   }
